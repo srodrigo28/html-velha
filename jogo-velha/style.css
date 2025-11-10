@@ -1,0 +1,174 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh;
+}
+
+body{
+    /* background 1
+    background-image: linear-gradient(
+        43deg,
+        #4158d0 0%, 
+        #c450c0 43%
+        #ffcc70 100%
+    );
+    height: 100vh;
+    */
+
+    /* background 2 */ 
+    background: linear-gradient(
+        90deg,
+        rgba(65, 185, 131, 1)  0%, 
+        rgba(0, 212, 255, 1) 100%
+    );
+
+    /* background 3
+    background-image: linear-gradient(
+        to top, 
+        #0ea5e9 0%, 
+        #6366f1 100%
+    ); */
+}
+
+.board{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;      
+    
+    grid-template-columns: repeat(3, auto);
+}
+
+/* Adiciona transparência no hover */
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.circle):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.cell{
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7){
+    border-left: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9){
+    border-bottom: none;
+}
+
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9){
+    border-right: none;
+}
+
+/* Criando o X */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    content: "";
+    position: absolute;
+    background: white;
+    
+    width: calc(100px * 0.1);
+    height: calc(100px * 0.9);
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.cirle):hover::after{
+    transform: rotate(-45deg);
+}
+
+/* Criando o circle */
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    content: "";
+    position: absolute;
+    background: white;
+    width: calc(100px * 0.8);
+    height: calc(100px * 0.8);
+    border-radius: 50%;
+}
+
+/* verifica se já está selecionado caso sim não permite mudar */
+.cell.x, .cell.circle{
+    cursor: not-allowed;
+}
+
+/* Messagem de vitoria */
+.winning-message{
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+
+    background-color: rgba(0,0,0, 0.8);
+}
+
+.winning-message-button{
+    font-size: 1.8rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 12px;
+    border: none;
+    margin-top: 18px;
+    background-color: rgba(65,185,131,1);
+    color: white;
+    transition: 0.3s all;
+}
+
+.winning-message-button:hover{
+    transform: scale(1.1);
+    letter-spacing: 1.5px;
+    background-color: white;
+    color: rgba(65,185,131,1);
+}
+
+.winning-message-text{
+    color: white;
+    font-size: 5rem;
+}
+
+.show-winning-message{
+    display: flex;
+}

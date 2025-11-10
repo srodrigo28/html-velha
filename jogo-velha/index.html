@@ -2,12 +2,12 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./estilo.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da velha</title>
 </head>
 <body>
-    <div class="board">
+    <div class="board" data-board>
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
@@ -20,8 +20,11 @@
     </div>
 
     <div class="winning-message" data-winning-message>
-        <p>X Venceu!</p>
-        <button>Reiniciar!</button>
+        <p class="winning-message-text" data-winning-message-text>X Venceu!</p>
+        <button data-restart-game 
+            class="winning-message-button">
+            Reiniciar!
+        </button>
     </div>
     <script src="./script.js"></script>
 </body>
