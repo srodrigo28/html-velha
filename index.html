@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO básico -->
     <title>Jogo da Velha Online</title>
-    <meta name="description" content="Jogo da velha clássico e divertido para jogar no navegador. X vs O, totalmente grátis e sem instalação. Desafie seus amigos!">
+    <meta name="description"
+        content="Jogo da velha clássico e divertido para jogar no navegador. X vs O, totalmente grátis e sem instalação. Desafie seus amigos!">
     <meta name="keywords" content="jogo da velha, tic tac toe, jogo online, jogo grátis, jogo no navegador">
     <meta name="author" content="Sebastião Rodrigo">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp, etc.) -->
     <meta property="og:title" content="Jogo da Velha Online - Jogue Agora!">
-    <meta property="og:description" content="Jogo da velha clássico para jogar direto no navegador. X ou O, quem ganha?">
+    <meta property="og:description"
+        content="Jogo da velha clássico para jogar direto no navegador. X ou O, quem ganha?">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://html-velha.vercel.app/"> <!-- troque pela URL real -->
     <meta property="og:image" content="https://html-velha.vercel.app/preview/home.png"> <!-- URL ABSOLUTA da imagem -->
@@ -85,28 +88,20 @@
             <p class="start-subtitle">Você quer jogar como <strong>X</strong> ou <strong>O</strong>?</p>
 
             <div class="difficulty-selection" data-difficulty-container>
-    <label for="difficulty">Nível de Dificuldade:</label>
-    <select id="difficulty" data-difficulty>
-        <option value="1">1 - Fácil</option>
-        <option value="2" selected>2 - Médio</option>
-        <option value="3">3 - Difícil</option>
-    </select>
-</div>
-            
+                <label for="difficulty">Nível de Dificuldade:</label>
+                <select id="difficulty" data-difficulty>
+                    <option value="1">1 - Fácil</option>
+                    <option value="2" selected>2 - Médio</option>
+                    <option value="3">3 - Difícil</option>
+                </select>
+            </div>
+
             <div class="symbol-selection" data-selection-container>
-                <button
-                    data-select-x
-                    class="select-button"
-                    aria-label="Selecionar X como seu símbolo"
-                >
+                <button data-select-x class="select-button" aria-label="Selecionar X como seu símbolo">
                     X
                 </button>
 
-                <button
-                    data-select-o
-                    class="select-button"
-                    aria-label="Selecionar O como seu símbolo"
-                >
+                <button data-select-o class="select-button" aria-label="Selecionar O como seu símbolo">
                     O
                 </button>
             </div>
@@ -119,4 +114,5 @@
 
     <script src="./script.js"></script>
 </body>
+
 </html>
