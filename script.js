@@ -1,44 +1,38 @@
-const board = document.querySelector('[data-board]')
+const board = document.querySelector('[data-board]');
 const cellElements = document.querySelectorAll('[data-cell]');
 const restartGame = document.querySelector('[data-restart-game]');
-const winningMessage = document.querySelector('[data-winning-message]')
-const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
+const winningMessage = document.querySelector('[data-winning-message]');
+const winningMessageTextElement = document.querySelector('[data-winning-message-text]');
 
-let isCircleTurn;
+let isCircleTurn = false;
 
-// combinações array para vitórias
 const winningCombinations = [
-    // colunas e linhas
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // linhas
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // colunas
+    [0, 4, 8], [2, 4, 6]             // diagonais
+];
 
-    // agora diagonais
-    [0, 4, 8],
-    [2, 4, 6],
-]
-
-const startGame = () => {    
-    for (const cell of cellElements){
-        cell.addEventListener("click", handleClick, { once: true });
-    }
+const startGame = () => {
     isCircleTurn = false;
-    board.classList.add('x'); // seleciona x ou circle para start
+    board.classList.remove('circle');
+    board.classList.add('x');
+
+    cellElements.forEach(cell => {
+        cell.classList.remove('x', 'circle');
+        cell.removeEventListener('click', handleClick); // remove eventos antigos
+        cell.addEventListener('click', handleClick, { once: true });
+    });
+
+    winningMessage.classList.remove('show-winning-message');
 };
 
 const endGame = (isDraw) => {
-    if(isDraw){
-        winningMessageTextElement.innerText = 'Empate!'
-    }else{
-        winningMessageTextElement.innerText = isCircleTurn 
-            ? 'O Venceu!' 
-            : 'X Venceu!';
+    if (isDraw) {
+        winningMessageTextElement.innerText = 'Empate!';
+    } else {
+        winningMessageTextElement.innerText = isCircleTurn ? 'O Venceu!' : 'X Venceu!';
     }
     winningMessage.classList.add('show-winning-message');
-
 };
 
 const checkForWin = (currentPlayer) => {
@@ -49,47 +43,48 @@ const checkForWin = (currentPlayer) => {
     });
 };
 
+const checkForDraw = () => {
+    return [...cellElements].every(cell => {
+        return cell.classList.contains('x') || cell.classList.contains('circle');
+    });
+};
+
 const placeMark = (cell, classToAdd) => {
     cell.classList.add(classToAdd);
-
-    board.classList.remove('circle')
-    board.classList.remove('x')
-
-    if(isCircleTurn){
-        board.classList.add('circle')
-    }else{
-        board.classList.add('x')
-    }
-}
+};
 
 const swapTurns = () => {
-    isCircleTurn = !isCircleTurn
+    isCircleTurn = !isCircleTurn;
+    
+    board.classList.remove('x', 'circle');
+    board.classList.add(isCircleTurn ? 'circle' : 'x');
 };
 
 const handleClick = (e) => {
     const cell = e.target;
-    
-    const classToAdd = isCircleTurn ? 'circle' : 'x';
-    
-    placeMark(cell, classToAdd);
-    // marcar a celular com x ou circle
-    
-    // verificar se há um vencedor
-    const isWin = checkForWin(classToAdd);
-    if(isWin){
-        endGame(false)
+    const currentClass = isCircleTurn ? 'circle' : 'x';
 
-        // alert('Winner ' + classToAdd)
+    // Coloca a marca
+    placeMark(cell, currentClass);
+
+    // Verifica vitória
+    if (checkForWin(currentClass)) {
+        endGame(false);
+        return;
     }
-    // verificar se há um empate
 
-    // mudar o símbolo
+    // Verifica empate
+    if (checkForDraw()) {
+        endGame(true);
+        return;
+    }
+
+    // Troca o turno
     swapTurns();
 };
 
+// Inicia o jogo
 startGame();
 
-// Adiciona o evento de clique
-restartGame.addEventListener('click', () => {
-    location.reload(); // Recarrega a página inteira
-});
+// Botão de reiniciar
+restartGame.addEventListener('click', startGame); // melhor que location.reload()
