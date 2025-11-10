@@ -19,19 +19,22 @@ body{
     height: 100vh;
     */
 
-    /* background 2 */ 
+    /* background 2  
     background: linear-gradient(
         90deg,
         rgba(65, 185, 131, 1)  0%, 
         rgba(0, 212, 255, 1) 100%
     );
-
-    /* background 3
+    */
+    /* background 3 */
     background-image: linear-gradient(
         to top, 
         #0ea5e9 0%, 
         #6366f1 100%
-    ); */
+    ); 
+
+    overflow: hidden;
+    overflow-y: hidden;
 }
 
 .board{
@@ -44,6 +47,12 @@ body{
     align-content: center;      
     
     grid-template-columns: repeat(3, auto);
+}
+
+.titulo{
+    color:white;
+    padding: 50px;
+    position: absolute
 }
 
 /* Adiciona transparência no hover */

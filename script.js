@@ -1,6 +1,6 @@
 const board = document.querySelector('[data-board]')
 const cellElements = document.querySelectorAll('[data-cell]');
-const restartGame = document.querySelectorAll('[data-restart-game]');
+const restartGame = document.querySelector('[data-restart-game]');
 const winningMessage = document.querySelector('[data-winning-message]')
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 
@@ -88,3 +88,8 @@ const handleClick = (e) => {
 };
 
 startGame();
+
+// Adiciona o evento de clique
+restartGame.addEventListener('click', () => {
+    location.reload(); // Recarrega a página inteira
+});
