@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <title>Jogo da Velha Online - Batalha vs. CPU</title>
+    <meta name="description" content="Jogo da velha clássico contra a CPU com placar e histórico de vitórias salvo.">
+            <link rel="stylesheet" type="text/css" href="./style-ai-grok.css">
+</head>
+
+<body>
+    <h1 class="titulo">Jogo da Velha (Treina Dev)</h1>
+
+    <section class="score-board">
+        <div class="score-card player-score">
+            <h2>Você (X)</h2>
+            <span data-score-player>0</span>
+        </div>
+        <div class="score-card cpu-score">
+            <h2>CPU (O)</h2>
+            <span data-score-cpu>0</span>
+        </div>
+        <div class="score-card ties-score">
+            <h2>Empates</h2>
+            <span data-score-ties>0</span>
+        </div>
+    </section>
+
+        <div class="board" data-board>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+    </div>
+
+        <div class="winning-message" data-winning-message>
+        <p class="winning-message-text" data-winning-message-text>X Venceu!</p>
+        <button data-restart-game class="winning-message-button">
+            Jogar Novamente!
+        </button>
+    </div>
+
+    <div class="start-message" data-start-message>
+        <div class="start-content">
+            <h2 class="start-title">Escolha seu Símbolo</h2>
+            <p class="start-subtitle">Você quer jogar como **X** ou **O**?</p>
+            
+            <div class="symbol-selection" data-selection-container>
+                <button 
+                    data-select-x 
+                    class="select-button" 
+                    aria-label="Selecionar X como seu símbolo"
+                >
+                    X
+                </button>
+                
+                <button 
+                    data-select-o 
+                    class="select-button" 
+                    aria-label="Selecionar O como seu símbolo"
+                >
+                    O
+                </button>
+            </div>
+
+            <button data-start-game class="start-button" disabled>
+                Iniciar Jogo
+            </button>
+        </div>
+    </div>
+    
+    <script src="./script-ai-grok.js"></script>
+</body>
+</html>

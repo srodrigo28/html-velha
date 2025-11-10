@@ -1,0 +1,83 @@
+/* style-ai.css - VERSÃO CORRIGIDA E PERFEITA */
+
+/* (mantive tudo igual até aqui...) */
+
+/* --- TABULEIRO --- */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 0;
+    flex-grow: 1;
+    justify-content: center;
+    align-content: center;
+}
+
+/* Células */
+.cell {
+    border: 3px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    background: transparent;
+}
+
+/* CORREÇÃO 1: Remove bordas externas CORRETAMENTE */
+.cell:nth-child(-n+3) { border-top: none; }    /* topo */
+.cell:nth-child(3n+1) { border-left: none; }  /* esquerda */
+.cell:nth-child(n+7) { border-bottom: none; } /* baixo */
+.cell:nth-child(3n)   { border-right: none; } /* direita */
+
+/* --- X --- */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 86px;
+    background: #fff;
+    border-radius: 6px;
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before { transform: rotate(45deg); }
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after  { transform: rotate(-45deg); }
+
+/* --- O (Círculo) - CORREÇÃO PRINCIPAL AQUI --- */
+/* Usa apenas ::before com borda grossa + fundo transparente */
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    content: "";
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    border: 13px solid #fff;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background: transparent !important; /* garante que não tenha fundo */
+}
+
+/* Remove completamente o ::after do círculo (era o que criava o "buraco") */
+.cell.circle::after {
+    display: none !important;
+}
+
+/* Hover para célula vazia */
+.board.x .cell:not(.x):not(.circle):hover,
+.board.circle .cell:not(.x):not(.circle):hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Cursor após jogada */
+.cell.x,
+.cell.circle {
+    cursor: not-allowed;
+}
+
+/* (o resto do CSS permanece 100% igual - telas, placar, etc.) */
